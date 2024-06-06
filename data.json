@@ -1,0 +1,148 @@
+{
+    "all_teams": [
+        {
+            "name": "Germany",
+            "code": "de",
+            "group": "A",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/de.svg"
+        },
+        {
+            "name": "Scotland",
+            "code": "gb-sct",
+            "group": "A",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/gb-sct.svg"
+        },
+        {
+            "name": "Hungary",
+            "code": "hu",
+            "group": "A",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/hu.svg"
+        },
+        {
+            "name": "Hungary",
+            "code": "hu",
+            "group": "A",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/hu.svg"
+        },
+        {
+            "name": "Spain",
+            "code": "es",
+            "group": "B",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/es.svg"
+        },
+        {
+            "name": "Croatia",
+            "code": "hr",
+            "group": "B",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/hr.svg"
+        },
+        {
+            "name": "Italy",
+            "code": "it",
+            "group": "B",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/it.svg"
+        },
+        {
+            "name": "Albania",
+            "code": "al",
+            "group": "B",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/al.svg"
+        },
+        {
+            "name": "Slovenia",
+            "code": "si",
+            "group": "C",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/si.svg"
+        },
+        {
+            "name": "Denmark",
+            "code": "dk",
+            "group": "C",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/dk.svg"
+        },
+        {
+            "name": "Serbia",
+            "code": "rs",
+            "group": "C",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/rs.svg"
+        },
+        {
+            "name": "England",
+            "code": "gb-eng",
+            "group": "C",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/gb-eng.svg"
+        },
+        {
+            "name": "Netherlands",
+            "code": "nl",
+            "group": "D",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/nl.svg"
+        },
+        {
+            "name": "Austria",
+            "code": "at",
+            "group": "D",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/at.svg"
+        },
+        {
+            "name": "France",
+            "code": "fr",
+            "group": "D",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/fr.svg"
+        },
+        {
+            "name": "Poland",
+            "code": "pl",
+            "group": "D",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/pl.svg"
+        },
+        {
+            "name": "Belgium",
+            "code": "be",
+            "group": "E",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/pl.svg"
+        },
+        {
+            "name": "Slovakia",
+            "code": "sk",
+            "group": "E",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/sk.svg"
+        },
+        {
+            "name": "Romania",
+            "code": "ro",
+            "group": "E",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/ro.svg"
+        },
+        {
+            "name": "Ukraine",
+            "code": "ua",
+            "group": "E",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/ua.svg"
+        },
+        {
+            "name": "Turkey",
+            "code": "tr",
+            "group": "F",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/tr.svg"
+        },
+        {
+            "name": "Portugal",
+            "code": "pt",
+            "group": "F",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/pt.svg"
+        },
+        {
+            "name": "Georgia",
+            "code": "ge",
+            "group": "F",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/ge.svg"
+        },
+        {
+            "name": "Czech Republic",
+            "code": "cz",
+            "group": "F",
+            "url": "https://cf.eip.telegraph.co.uk/flags/4x3/cz.svg"
+        }
+    ]
+}
