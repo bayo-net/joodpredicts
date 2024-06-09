@@ -3,6 +3,7 @@ import { Team } from './types/sharedtypes'
 export const groups: string[] = ['A', 'B', 'C', 'D', 'E', 'F']
 export const MAX_TEAMS_IN_GROUP = 4
 export const THIRD_PLACE_STANDING = 3
+export const ROUND16_MATCHCOUNT = 8
 export const teams: Team[] = [
     {
         name: 'Germany',
@@ -120,7 +121,7 @@ export const teams: Team[] = [
         name: 'Belgium',
         code: 'be',
         group: 'E',
-        url: 'https://cf.eip.telegraph.co.uk/flags/4x3/pl.svg',
+        url: 'https://cf.eip.telegraph.co.uk/flags/4x3/be.svg',
         shortName: 'BEL',
     },
     {
@@ -156,14 +157,14 @@ export const teams: Team[] = [
         code: 'pt',
         group: 'F',
         url: 'https://cf.eip.telegraph.co.uk/flags/4x3/pt.svg',
-        shortName: 'GEO',
+        shortName: 'POR',
     },
     {
         name: 'Georgia',
         code: 'ge',
         group: 'F',
         url: 'https://cf.eip.telegraph.co.uk/flags/4x3/ge.svg',
-        shortName: 'POR',
+        shortName: 'GEO',
     },
     {
         name: 'Czech Republic',
@@ -173,3 +174,9 @@ export const teams: Team[] = [
         shortName: 'CZE',
     },
 ]
+
+export const knockStageRules = {
+    /*
+        GroupA Winner vs Group B Winner
+     */
+}

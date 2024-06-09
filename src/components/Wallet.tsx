@@ -18,7 +18,7 @@ function Wallet({ children }: { children: React.ReactNode }) {
 
     // @solana/wallet-adapter-wallets includes all the adapters but supports tree shaking --
     // Only the wallets you configure here will be compiled into your application
-    const wallets = useMemo(() => [], [])
+    const wallets = useMemo(() => [], [network])
 
     return (
         <ConnectionProvider endpoint={endpoint}>

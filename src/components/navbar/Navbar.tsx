@@ -19,7 +19,7 @@ const WalletMultiButtonDynamic = dynamic(
 
 export const Navbar = () => {
     return (
-        <div className="fixed w-full shadow-sm">
+        <div className="fixed w-full shadow-sm z-50">
             <div className="py-3 border-b border-b-gray-800 backdrop-blur-sm">
                 <Container>
                     <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
