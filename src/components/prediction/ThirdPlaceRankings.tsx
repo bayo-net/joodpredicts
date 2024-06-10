@@ -32,20 +32,13 @@ export const ThirdPlaceRankings: React.FC<ThirdPlaceRankingsProps> = ({
     }
 
     const handleSelection = (selectedIndex: number) => {
-        console.log('selected index', selectedIndex)
         if (!checkIfAlreadySelected(selectedIndex)) {
-            console.log('came here')
             setAllUserSelections((prevState: any) => {
                 const newState = _.cloneDeep(prevState)
                 const { thirdPlaceRankings: thirdPlaceRankingsUserSelection } =
                     newState
                 for (let index in thirdPlaceRankingsUserSelection) {
-                    console.log(
-                        'thirdPlaceRankingsUserSelection',
-                        thirdPlaceRankingsUserSelection[index]
-                    )
                     if (!thirdPlaceRankingsUserSelection[index]) {
-                        console.log('valid scenario')
                         thirdPlaceRankingsUserSelection[index] =
                             thirdPlaceRankingsFromGroups[selectedIndex]
                         break
@@ -56,8 +49,6 @@ export const ThirdPlaceRankings: React.FC<ThirdPlaceRankingsProps> = ({
             })
         }
     }
-
-    console.log('updated state', allUserSelections)
 
     const handleDelete = (selectedIndex: any) => {
         setAllUserSelections((prevState: any) => {
