@@ -4,7 +4,7 @@ import Image from 'next/image'
 import * as _ from 'lodash'
 import { GroupStageCard } from './GroupStageCard'
 import { Standings } from './Standings'
-import { getThirdPlaceRankings } from '@/utils'
+import { getThirdPlaceRankings } from '@/utils/utils'
 import { DeleteIcon } from '../DeleteIcon'
 import { v4 as uuidv4 } from 'uuid'
 

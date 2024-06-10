@@ -1,6 +1,6 @@
 'use client'
 
-import { merge } from '@/utils'
+import { merge } from '@/utils/utils'
 
 interface GroupStageCardProps {
     children: React.ReactNode

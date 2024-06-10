@@ -3,7 +3,7 @@
 export const Logo = () => {
     return (
         <div>
-            <h1 className="text-2xl font-bold">CoinGoal</h1>
+            <h1 className="text-2xl font-bold">JOODPredicts</h1>
             <div className="flex flex-row text-sm text-gray-500 gap-1">
                 <p>by</p>
                 <img

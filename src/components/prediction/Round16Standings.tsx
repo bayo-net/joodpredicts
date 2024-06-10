@@ -3,7 +3,7 @@
 import { ROUND16_FIXTURE_RULES, ROUND16_STARTMATCH_NUM } from '@/constant'
 import { v4 as uuidv4 } from 'uuid'
 import { TeamVsTeamCard } from './TeamVsTeamCard'
-import { getFallbackTextContent, getTeamInfoFromPosition } from '@/utils'
+import { getFallbackTextContent, getTeamInfoFromPosition } from '@/utils/utils'
 import { useCallback } from 'react'
 import _ from 'lodash'
 

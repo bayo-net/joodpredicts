@@ -8,12 +8,21 @@ import {
     THIRD_PLACE_STANDING,
     WINNER,
     groups,
+    rpcEndPointUrl,
     teams,
 } from '@/constant'
-import { Team } from './types/sharedtypes'
+import { Team } from '../types/sharedtypes'
 import { toast } from 'react-toastify'
 import { WalletContextState } from '@solana/wallet-adapter-react'
+import {
+    BlockhashWithExpiryBlockHeight,
+    Commitment,
+    Connection,
+    TransactionExpiredBlockheightExceededError,
+} from '@solana/web3.js'
+import promiseRetry from 'promise-retry'
 
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 export const merge = (...args: any) => {
     return twMerge(...args)
 }
@@ -108,7 +117,7 @@ export const validateSubmit = (
         console.log('is wallet connected', wallet.connected)
         if (!wallet.connected) {
             toast('Connect your wallet to submit', {
-                position: 'bottom-right',
+                position: 'top-center',
                 closeOnClick: true,
                 theme: 'dark',
             })
@@ -154,9 +163,11 @@ export const validateSubmit = (
             !semiFinalsRankingsValid ||
             !finalsRankingsValid
         ) {
-            alert(
-                'Validation failed: Please make sure all group rankings are filled out correctly.'
-            )
+            toast('Please make sure all predictions are completed!', {
+                position: 'top-center',
+                closeOnClick: true,
+                theme: 'dark',
+            })
             return false
         }
         return true
@@ -164,4 +175,98 @@ export const validateSubmit = (
         console.log(err)
         return false
     }
+}
+
+export const executeTransaction = async (
+    connection: Connection,
+    tx: Buffer,
+    blockhashInfo: BlockhashWithExpiryBlockHeight
+): Promise<string | null> => {
+    const sendOptions = {
+        maxRetries: 0,
+        skipPreflight: true,
+        preflightCommitment: 'confirmed' as Commitment,
+    }
+
+    const txid = await connection.sendRawTransaction(tx, sendOptions)
+    console.log(txid)
+
+    const controller = new AbortController()
+    const abortSignal = controller.signal
+
+    const abortableResender = async () => {
+        while (true) {
+            await sleep(2_000)
+            if (abortSignal.aborted) return
+            try {
+                await connection.sendRawTransaction(tx, sendOptions)
+            } catch (e) {
+                console.warn(`Failed to resend transaction: ${e}`)
+            }
+        }
+    }
+
+    try {
+        abortableResender()
+        const lastValidBlockHeight = blockhashInfo.lastValidBlockHeight - 150
+
+        // this would throw TransactionExpiredBlockheightExceededError
+        await Promise.race([
+            connection.confirmTransaction(
+                {
+                    ...blockhashInfo,
+                    lastValidBlockHeight,
+                    signature: txid,
+                    abortSignal,
+                },
+                'confirmed'
+            ),
+            new Promise(async (resolve) => {
+                // in case ws socket died
+                while (!abortSignal.aborted) {
+                    await sleep(2_000)
+                    const tx = await connection.getSignatureStatus(txid, {
+                        searchTransactionHistory: false,
+                    })
+                    if (tx?.value?.confirmationStatus === 'confirmed') {
+                        resolve(tx)
+                    }
+                }
+            }),
+        ])
+    } catch (e) {
+        if (e instanceof TransactionExpiredBlockheightExceededError) {
+            // we consume this error and getTransaction would return null
+            return null
+        } else {
+            // invalid state from web3.js
+            throw e
+        }
+    } finally {
+        controller.abort()
+    }
+
+    // in case rpc is not synced yet, we add some retries
+    const txResult = await promiseRetry(
+        async (retry) => {
+            const response = await connection.getTransaction(txid, {
+                commitment: 'confirmed',
+                maxSupportedTransactionVersion: 0,
+            })
+            if (!response) {
+                retry(response)
+            }
+            return response
+        },
+        {
+            retries: 5,
+            minTimeout: 1e3,
+        }
+    )
+
+    if (!txResult || txResult.meta?.err) {
+        return null
+    }
+
+    return txid
 }

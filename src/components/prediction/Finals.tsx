@@ -8,7 +8,7 @@ import {
 } from '@/constant'
 import { v4 as uuidv4 } from 'uuid'
 import _ from 'lodash'
-import { getFallbackTextContent, getTeamInfoFromPosition } from '@/utils'
+import { getFallbackTextContent, getTeamInfoFromPosition } from '@/utils/utils'
 import { TeamVsTeamCard } from './TeamVsTeamCard'
 import { useCallback } from 'react'
 

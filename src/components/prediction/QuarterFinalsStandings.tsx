@@ -10,7 +10,7 @@ import {
     QUARTERS_STARTMATCH_NUM,
     ROUND16_STARTMATCH_NUM,
 } from '@/constant'
-import { getFallbackTextContent, getTeamInfoFromPosition } from '@/utils'
+import { getFallbackTextContent, getTeamInfoFromPosition } from '@/utils/utils'
 import { TeamVsTeamCard } from './TeamVsTeamCard'
 import { useCallback } from 'react'
 import _ from 'lodash'

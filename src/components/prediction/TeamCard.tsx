@@ -1,6 +1,6 @@
 'use client'
 
-import { merge } from '@/utils'
+import { merge } from '@/utils/utils'
 import Image from 'next/image'
 import { v4 as uuidv4 } from 'uuid'
 

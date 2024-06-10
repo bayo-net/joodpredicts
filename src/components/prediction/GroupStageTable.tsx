@@ -4,7 +4,7 @@ import { Team } from '@/types/sharedtypes'
 import Image from 'next/image'
 import { v4 as uuidv4 } from 'uuid'
 import * as _ from 'lodash'
-import { groupCountriesMap, merge } from '@/utils'
+import { groupCountriesMap, merge } from '@/utils/utils'
 import { Standings } from './Standings'
 import { DeleteIcon } from '../DeleteIcon'
 

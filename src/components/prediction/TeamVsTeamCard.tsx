@@ -3,8 +3,6 @@
 import { Team } from '@/types/sharedtypes'
 import { TeamCard } from './TeamCard'
 import * as _ from 'lodash'
-import { ROUND16_STARTMATCH_NUM } from '@/constant'
-import { useCallback } from 'react'
 
 interface TeamVsTeamCardProps {
     firstTeam: Team
