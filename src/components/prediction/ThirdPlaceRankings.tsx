@@ -38,14 +38,20 @@ export const ThirdPlaceRankings: React.FC<ThirdPlaceRankingsProps> = ({
             setAllUserSelections((prevState: any) => {
                 const newState = _.cloneDeep(prevState)
                 const { thirdPlaceRankings: thirdPlaceRankingsUserSelection } =
-                    allUserSelections
+                    newState
                 for (let index in thirdPlaceRankingsUserSelection) {
+                    console.log(
+                        'thirdPlaceRankingsUserSelection',
+                        thirdPlaceRankingsUserSelection[index]
+                    )
                     if (!thirdPlaceRankingsUserSelection[index]) {
+                        console.log('valid scenario')
                         thirdPlaceRankingsUserSelection[index] =
                             thirdPlaceRankingsFromGroups[selectedIndex]
                         break
                     }
                 }
+                newState.thirdPlaceRankings = thirdPlaceRankingsUserSelection
                 return newState
             })
         }
