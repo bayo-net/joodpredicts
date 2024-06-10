@@ -373,6 +373,8 @@ export const teams: Team[] = [
     },
 ]
 
+export const JoodTokenAddress = '6ouRmNFECtQgjwbwWqjiWGGZxY4DBAttoGtor5CWjTNm'
+
 export const JOOD_MINT_ADDRESS = new PublicKey(
     '6ouRmNFECtQgjwbwWqjiWGGZxY4DBAttoGtor5CWjTNm'
 )

@@ -5,7 +5,12 @@ import {
     PublicKey,
 } from '@solana/web3.js'
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token'
-import { JOOD_MINT_ADDRESS, TOKEN_FEE, rpcEndPointUrl } from '@/constant'
+import {
+    JOOD_MINT_ADDRESS,
+    JoodTokenAddress,
+    TOKEN_FEE,
+    rpcEndPointUrl,
+} from '@/constant'
 
 export const fetchAllSplTokens = (wallet: string, connection: Connection) => {
     if (!wallet) {
@@ -45,15 +50,19 @@ const getTokenAccounts = async (
 }
 
 export const getTokenExistsAndUiAmount = (accounts: any[]) => {
+    console.log('accounts', accounts)
     for (let index in accounts) {
         if (
             accounts[index]?.account?.data?.parsed?.info?.mint ===
-                JOOD_MINT_ADDRESS &&
-            Math.round(
-                accounts[index]?.account?.data?.parsed?.info?.tokenAmount
-                    ?.uiAmount
-            ) >= TOKEN_FEE
+                JoodTokenAddress &&
+            Number(
+                Math.round(
+                    accounts[index]?.account?.data?.parsed?.info?.tokenAmount
+                        ?.uiAmount
+                )
+            ) >= Number(TOKEN_FEE)
         ) {
+            console.log('came here')
             return true
         }
     }

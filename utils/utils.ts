@@ -12,7 +12,6 @@ import {
     teams,
 } from '@/constant'
 import { Team } from '../types/sharedtypes'
-import { toast } from 'react-toastify'
 import { WalletContextState } from '@solana/wallet-adapter-react'
 import {
     BlockhashWithExpiryBlockHeight,
@@ -21,6 +20,7 @@ import {
     TransactionExpiredBlockheightExceededError,
 } from '@solana/web3.js'
 import promiseRetry from 'promise-retry'
+import { toast } from 'sonner'
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 export const merge = (...args: any) => {
@@ -116,11 +116,7 @@ export const validateSubmit = (
     try {
         console.log('is wallet connected', wallet.connected)
         if (!wallet.connected) {
-            toast('Connect your wallet to submit', {
-                position: 'top-center',
-                closeOnClick: true,
-                theme: 'dark',
-            })
+            toast.error('Connect your wallet to submit')
             return false
         }
 
@@ -163,11 +159,7 @@ export const validateSubmit = (
             !semiFinalsRankingsValid ||
             !finalsRankingsValid
         ) {
-            toast('Please make sure all predictions are completed!', {
-                position: 'top-center',
-                closeOnClick: true,
-                theme: 'dark',
-            })
+            toast.error('Please make sure all predictions are completed!')
             return false
         }
         return true
