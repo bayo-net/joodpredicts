@@ -11,12 +11,21 @@ import {
 } from '@/constant'
 import { Container } from '@/src/components/Container'
 import { Heading } from '@/src/components/header/Heading'
+import { Finals } from '@/src/components/prediction/Finals'
 import { GroupStageTable } from '@/src/components/prediction/GroupStageTable'
+import { QuarterFinalsStandings } from '@/src/components/prediction/QuarterFinalsStandings'
 import { Round16Standings } from '@/src/components/prediction/Round16Standings'
+import { SemiFinalStandings } from '@/src/components/prediction/SemiFinalStandings'
 import { ThirdPlaceRankings } from '@/src/components/prediction/ThirdPlaceRankings'
-import { createBooleanArray, initializeGroupObject } from '@/utils'
+import {
+    createBooleanArray,
+    initializeGroupObject,
+    validateSubmit,
+} from '@/utils'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Prediction() {
     // setAllUserStates in one action
@@ -32,9 +41,7 @@ export default function Prediction() {
     const wallet = useWallet()
 
     const handleSubmit = () => {
-        if (!wallet.connected) {
-            alert('wallet not not connected')
-        }
+        const isValid = validateSubmit(allUserSelections, wallet)
     }
 
     return (
@@ -71,6 +78,53 @@ export default function Prediction() {
                 headingText="Quarter Finals"
                 subHeadingText="Choose your winners for each match"
             />
+            <QuarterFinalsStandings
+                setAllUserSelections={setAllUserSelections}
+                allUserSelections={allUserSelections}
+            />
+            <Heading
+                count={5}
+                headingText="Semi-Finals"
+                subHeadingText="Choose your winners for each match"
+            />
+            <SemiFinalStandings
+                setAllUserSelections={setAllUserSelections}
+                allUserSelections={allUserSelections}
+            />
+            <Heading
+                count={6}
+                headingText="Finals"
+                subHeadingText="Choose your winner"
+            />
+            <Finals
+                setAllUserSelections={setAllUserSelections}
+                allUserSelections={allUserSelections}
+            />
+            <div
+                className="
+                flex
+                justify-center
+                items-center
+                mt-5"
+            >
+                <button
+                    className="
+                px-3
+                py-2
+                rounded-lg
+                bg-gradient-to-r from-[#004AAD] to-[#001E47]
+                font-semibold
+                text-sm
+                text-[#F9F9F9]
+                border-[0.5px]
+                border-[#407ED2]
+                "
+                    onClick={handleSubmit}
+                >
+                    Submit Bracket
+                </button>
+            </div>
+            <ToastContainer />
         </Container>
     )
 }

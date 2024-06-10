@@ -14,6 +14,10 @@ export const RUNNERUP = 1
 export const THIRDPLACED = 2
 export const FOURTHPLACE = 3
 
+export const QUARTERS_STARTMATCH_NUM = 45
+export const SEMIS_STARTMATCH_NUM = 49
+export const FINALS_STARTMATCH_NUM = 51
+
 export const ROUND16_FIXTURE_RULES = [
     {
         firstTeam: {
@@ -97,6 +101,99 @@ export const ROUND16_FIXTURE_RULES = [
         secondTeam: {
             group: 'F',
             position: RUNNERUP,
+        },
+    },
+]
+
+export const QUARTERFINALS_FIXTURE_RULES = [
+    {
+        firstTeam: {
+            group: false,
+            quarters: true,
+            match: 37,
+        },
+        secondTeam: {
+            group: false,
+            quarters: true,
+            match: 39,
+        },
+    },
+    {
+        firstTeam: {
+            group: false,
+            quarters: true,
+            match: 41,
+        },
+        secondTeam: {
+            group: false,
+            quarters: true,
+            match: 42,
+        },
+    },
+    {
+        firstTeam: {
+            group: false,
+            quarters: true,
+            match: 43,
+        },
+        secondTeam: {
+            group: false,
+            quarters: true,
+            match: 44,
+        },
+    },
+    {
+        firstTeam: {
+            group: false,
+            quarters: true,
+            match: 40,
+        },
+        secondTeam: {
+            group: false,
+            quarters: true,
+            match: 38,
+        },
+    },
+]
+
+export const SEMIFINALS_FIXTURE_RULES = [
+    {
+        firstTeam: {
+            group: false,
+            semis: true,
+            match: 45,
+        },
+        secondTeam: {
+            group: false,
+            semis: true,
+            match: 46,
+        },
+    },
+    {
+        firstTeam: {
+            group: false,
+            semis: true,
+            match: 47,
+        },
+        secondTeam: {
+            group: false,
+            semis: true,
+            match: 48,
+        },
+    },
+]
+
+export const FINALS_FIXTURE_RULES = [
+    {
+        firstTeam: {
+            group: false,
+            finals: true,
+            match: 49,
+        },
+        secondTeam: {
+            group: false,
+            finals: true,
+            match: 50,
         },
     },
 ]

@@ -10,6 +10,7 @@ interface TeamCardProps {
     fallbackContent?: string
     handleClick: any
     checkIfAlreadySelected: any
+    matchNumber: any
 }
 
 export const TeamCard: React.FC<TeamCardProps> = ({
@@ -18,6 +19,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
     fallbackContent,
     handleClick,
     checkIfAlreadySelected,
+    matchNumber,
 }) => {
     return (
         <div
@@ -43,7 +45,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
                     : 'border-[#242424]'
             )}
             key={uuidv4()}
-            onClick={() => handleClick(team)}
+            onClick={() => handleClick(team, matchNumber)}
         >
             {!isFallback && (
                 <>

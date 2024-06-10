@@ -23,7 +23,6 @@ export const GroupStageTable: React.FC<GroupStageTableProps> = ({
         return Object.keys(groupStageRankings[team.group]).some(
             (entry) => groupStageRankings[team.group][entry].code === team.code
         )
-        return false
     }
 
     const handleDelete = (team: Team) => {
@@ -45,30 +44,22 @@ export const GroupStageTable: React.FC<GroupStageTableProps> = ({
                 }
             }
 
-            console.log('deletedItemTeamCode', deletedItemTeamCode)
             // effect thirdplace rankings
             const thirdPlaceRankingsFromUserSelection =
                 newState.thirdPlaceRankings
-            for (let team in thirdPlaceRankingsFromUserSelection) {
-                console.log(
-                    'thirdPlaceRankingsFromUserSelection',
-                    thirdPlaceRankingsFromUserSelection[team]
-                )
+            for (let thirdPlaceTeamKey in thirdPlaceRankingsFromUserSelection) {
                 if (
-                    thirdPlaceRankingsFromUserSelection[team] &&
-                    thirdPlaceRankingsFromUserSelection[team].code ===
-                        deletedItemTeamCode
+                    thirdPlaceRankingsFromUserSelection[thirdPlaceTeamKey] &&
+                    thirdPlaceRankingsFromUserSelection[thirdPlaceTeamKey]
+                        .code === deletedItemTeamCode
                 ) {
-                    console.log('came here')
-                    thirdPlaceRankingsFromUserSelection[team] = false
+                    thirdPlaceRankingsFromUserSelection[thirdPlaceTeamKey] =
+                        false
                 }
-                break
             }
             return newState
         })
     }
-
-    console.log('thirdPlaceRankingsFromUserSelection', allUserSelections)
 
     const handleSelection = (team: Team) => {
         setAllUserSelections((prevState: any) => {
@@ -92,7 +83,7 @@ export const GroupStageTable: React.FC<GroupStageTableProps> = ({
     const PopulateStandings = ({ group }: { group: string }) => {
         return allUserSelections['groupStageRankings'][group].map(
             (team: Team, index: number) => (
-                <Standings>
+                <Standings key={uuidv4()}>
                     <p className="font-[500] text-[#949494]">{`${
                         index + 1
                     }.`}</p>
@@ -178,7 +169,10 @@ export const GroupStageTable: React.FC<GroupStageTableProps> = ({
                         ))}
                     </div>
                     <div className="flex flex-col bg-[#0A0A0A] rounded-lg">
-                        <PopulateStandings group={teamsByGroup[0].group} />
+                        <PopulateStandings
+                            group={teamsByGroup[0].group}
+                            key={uuidv4()}
+                        />
                     </div>
                     <p className="italic text-gray-500 text-[10px] leading-[12.1px] pt-3">
                         Click on countries in the order you think would rank

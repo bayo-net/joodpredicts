@@ -1,44 +1,42 @@
 'use client'
 
-import { ROUND16_FIXTURE_RULES, ROUND16_STARTMATCH_NUM } from '@/constant'
+import { SEMIFINALS_FIXTURE_RULES, SEMIS_STARTMATCH_NUM } from '@/constant'
 import { v4 as uuidv4 } from 'uuid'
-import { TeamVsTeamCard } from './TeamVsTeamCard'
-import { getFallbackTextContent, getTeamInfoFromPosition } from '@/utils'
-import { useCallback } from 'react'
 import _ from 'lodash'
+import { getFallbackTextContent, getTeamInfoFromPosition } from '@/utils'
+import { TeamVsTeamCard } from './TeamVsTeamCard'
+import { useCallback } from 'react'
 
-interface Round16StandingsProps {
+interface SemiFinalStandingsProps {
     allUserSelections: any
     setAllUserSelections: any
 }
 
-export const Round16Standings: React.FC<Round16StandingsProps> = ({
-    allUserSelections,
+export const SemiFinalStandings: React.FC<SemiFinalStandingsProps> = ({
     setAllUserSelections,
+    allUserSelections,
 }) => {
-    // Check from the rules
+    const handleClick = (team: any, matchNumber: number) => {
+        setAllUserSelections((prevState: any) => {
+            const newState = _.cloneDeep(prevState)
+            const { semiFinalsRankings } = newState
+            if (team !== undefined) {
+                semiFinalsRankings[matchNumber - SEMIS_STARTMATCH_NUM] = team
+            }
+
+            return newState
+        })
+    }
 
     const checkIfAlreadySelected = useCallback(
         (team: any) => {
-            return allUserSelections.round16Rankings.some(
+            return allUserSelections.semiFinalsRankings.some(
                 (rankings: any) =>
                     rankings && team && rankings.code === team.code
             )
         },
         [allUserSelections]
     )
-
-    const handleClick = (team: any, matchNumber: number) => {
-        setAllUserSelections((prevState: any) => {
-            const newState = _.cloneDeep(prevState)
-            const { round16Rankings } = newState
-            if (team !== undefined) {
-                round16Rankings[matchNumber - ROUND16_STARTMATCH_NUM] = team
-            }
-
-            return newState
-        })
-    }
 
     return (
         <div
@@ -47,24 +45,24 @@ export const Round16Standings: React.FC<Round16StandingsProps> = ({
         grid-flow-row
         gap-8
         grid-cols-1
-        xl:grid-cols-4
+        xl:grid-cols-2
         pb-5
         "
         >
-            {ROUND16_FIXTURE_RULES.map((round: any, index) => {
+            {SEMIFINALS_FIXTURE_RULES.map((round: any, index) => {
                 return (
                     <div
                         className="flex flex-col border-[0.5px] border-[#242424] bg-[#171616] px-3 py-2 rounded-lg"
                         key={uuidv4()}
                     >
                         <div className="text-start py-2">{`Match ${
-                            ROUND16_STARTMATCH_NUM + index
+                            SEMIS_STARTMATCH_NUM + index
                         }`}</div>
                         <TeamVsTeamCard
                             handleClick={handleClick}
-                            setAllUserSelections={setAllUserSelections}
-                            matchNumber={ROUND16_STARTMATCH_NUM + index}
                             checkIfAlreadySelected={checkIfAlreadySelected}
+                            setAllUserSelections={setAllUserSelections}
+                            matchNumber={SEMIS_STARTMATCH_NUM + index}
                             firstTeam={getTeamInfoFromPosition(
                                 round.firstTeam,
                                 allUserSelections
@@ -74,7 +72,7 @@ export const Round16Standings: React.FC<Round16StandingsProps> = ({
                                 allUserSelections
                             )}
                             firstTeamFallbackContent={getFallbackTextContent(
-                                round.firstTeam
+                                round.firstTeam!
                             )}
                             secondTeamFallbackContent={getFallbackTextContent(
                                 round.secondTeam

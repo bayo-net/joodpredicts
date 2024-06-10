@@ -1,7 +1,6 @@
 'use client'
 
 import { merge } from '@/utils'
-import { v4 as uuidv4 } from 'uuid'
 
 interface GroupStageCardProps {
     children: React.ReactNode
@@ -37,7 +36,6 @@ export const GroupStageCard: React.FC<GroupStageCardProps> = ({
                     ? 'cursor-not-allowed bg-[#1D2634] border-[#407ED2]'
                     : 'cursor-pointer text-white'
             )}
-            key={uuidv4()}
             onClick={() => handleSelection(index)}
         >
             {children}

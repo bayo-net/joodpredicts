@@ -6,6 +6,7 @@ import { GroupStageCard } from './GroupStageCard'
 import { Standings } from './Standings'
 import { getThirdPlaceRankings } from '@/utils'
 import { DeleteIcon } from '../DeleteIcon'
+import { v4 as uuidv4 } from 'uuid'
 
 interface ThirdPlaceRankingsProps {
     allUserSelections: any
@@ -59,7 +60,7 @@ export const ThirdPlaceRankings: React.FC<ThirdPlaceRankingsProps> = ({
     const PopulateStandings = () => {
         const thirdPlaceUserSelection = allUserSelections.thirdPlaceRankings
         return Object.keys(thirdPlaceUserSelection).map((team, index) => (
-            <Standings>
+            <Standings key={uuidv4()}>
                 <p>{index + 1}</p>
                 {thirdPlaceUserSelection[team] && (
                     <div className="flex flex-row gap-2 pl-5">
@@ -90,6 +91,7 @@ export const ThirdPlaceRankings: React.FC<ThirdPlaceRankingsProps> = ({
                         (team: any) => {
                             return (
                                 <GroupStageCard
+                                    key={uuidv4()}
                                     checkIfAlreadySelected={
                                         checkIfAlreadySelected
                                     }

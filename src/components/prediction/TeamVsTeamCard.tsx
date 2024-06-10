@@ -9,11 +9,12 @@ import { useCallback } from 'react'
 interface TeamVsTeamCardProps {
     firstTeam: Team
     secondTeam: Team
-    firstTeamFallbackContent: string
-    secondTeamFallbackContent: string
-    allUserSelections: any
+    firstTeamFallbackContent?: string
+    secondTeamFallbackContent?: string
     setAllUserSelections: any
     matchNumber: number
+    checkIfAlreadySelected: any
+    handleClick: any
 }
 
 export const TeamVsTeamCard: React.FC<TeamVsTeamCardProps> = ({
@@ -22,39 +23,9 @@ export const TeamVsTeamCard: React.FC<TeamVsTeamCardProps> = ({
     secondTeam,
     firstTeamFallbackContent,
     secondTeamFallbackContent,
-    allUserSelections,
-    setAllUserSelections,
+    handleClick,
+    checkIfAlreadySelected,
 }) => {
-    console.log('first team', firstTeam)
-    console.log('second team', secondTeam)
-
-    const handleClick = (team: any) => {
-        setAllUserSelections((prevState: any) => {
-            const newState = _.cloneDeep(prevState)
-            const { round16Rankings } = newState
-            if (
-                team &&
-                round16Rankings[matchNumber - ROUND16_STARTMATCH_NUM] === false
-            ) {
-                round16Rankings[matchNumber - ROUND16_STARTMATCH_NUM] = team
-            }
-
-            return newState
-        })
-    }
-
-    const checkIfAlreadySelected = useCallback(
-        (team: any) => {
-            return allUserSelections.round16Rankings.some(
-                (rankings: any) =>
-                    rankings && team && rankings.code === team.code
-            )
-        },
-        [allUserSelections]
-    )
-
-    console.log('new state', allUserSelections)
-
     const firstTeamPropsVal = () => {
         if (firstTeam) {
             return {
@@ -85,6 +56,7 @@ export const TeamVsTeamCard: React.FC<TeamVsTeamCardProps> = ({
         <div className="flex flex-row justify-between gap-2 relative">
             <TeamCard
                 {...firstTeamPropsVal()}
+                matchNumber={matchNumber}
                 handleClick={handleClick}
                 checkIfAlreadySelected={checkIfAlreadySelected}
             />
@@ -105,6 +77,7 @@ export const TeamVsTeamCard: React.FC<TeamVsTeamCardProps> = ({
             <TeamCard
                 {...secondTeamPropsVal()}
                 handleClick={handleClick}
+                matchNumber={matchNumber}
                 checkIfAlreadySelected={checkIfAlreadySelected}
             />
         </div>
