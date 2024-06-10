@@ -3,11 +3,10 @@
 import { v4 as uuidv4 } from 'uuid'
 
 interface StandingsProps {
-    key: any
     children: React.ReactNode
 }
 
-export const Standings: React.FC<StandingsProps> = ({ children, key }) => {
+export const Standings: React.FC<StandingsProps> = ({ children }) => {
     return (
         <div
             className="
@@ -25,7 +24,7 @@ export const Standings: React.FC<StandingsProps> = ({ children, key }) => {
         border-b-[#949494]
         relative
         "
-            key={key}
+            key={uuidv4()}
         >
             {children}
         </div>
