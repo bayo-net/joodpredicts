@@ -1,56 +1,32 @@
 'use client'
 
-import { groups, MAX_TEAMS_IN_GROUP, ROUND16_MATCHCOUNT } from '@/constant'
+import {
+    FINALS_MATCHCOUNT,
+    groups,
+    KNOCKOUT_MATCHCOUNT,
+    MAX_TEAMS_IN_GROUP,
+    ROUND16_MATCHCOUNT,
+    SEMIS_MATCHCOUNT,
+    THIRDPLACE_MATHCOUNT,
+} from '@/constant'
 import { Container } from '@/src/components/Container'
 import { Heading } from '@/src/components/header/Heading'
 import { GroupStageTable } from '@/src/components/prediction/GroupStageTable'
+import { Round16Standings } from '@/src/components/prediction/Round16Standings'
 import { ThirdPlaceRankings } from '@/src/components/prediction/ThirdPlaceRankings'
+import { createBooleanArray, initializeGroupObject } from '@/utils'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { useState } from 'react'
 
-const initializeGroupObject = (groups: string[], length: number) => {
-    const obj: any = {}
-    groups.forEach((group) => {
-        obj[group] = new Array(length).fill(false)
-    })
-    return obj
-}
-
-const createBooleanObject = (start: number, end: number, value: boolean) => {
-    const obj: any = {}
-    for (let i = start; i <= end; i++) {
-        obj[i] = value
-    }
-    return obj
-}
-
 export default function Prediction() {
-    const [userSelection, setUserSelection] = useState(
-        initializeGroupObject(groups, MAX_TEAMS_IN_GROUP)
-    )
-    const [thirdPlaceRankings, setThirdPlaceRankings] = useState(
-        createBooleanObject(0, MAX_TEAMS_IN_GROUP + 1, false)
-    )
-    const [thirdPlaceUserSelection, setThirdPlaceUserSelection] = useState(
-        createBooleanObject(0, MAX_TEAMS_IN_GROUP + 1, false)
-    )
-
-    const [round16Selections, setRound16Selections] = useState(
-        createBooleanObject(0, ROUND16_MATCHCOUNT, false)
-    )
-
     // setAllUserStates in one action
     const [allUserSelections, setAllUserSelections] = useState({
-        thirdPlaceRankings: [
-            createBooleanObject(0, MAX_TEAMS_IN_GROUP + 1, false),
-        ],
-        round16Rankings: [
-            createBooleanObject(0, MAX_TEAMS_IN_GROUP + 1, false),
-        ],
-        quarterFinalsRankings: [
-            createBooleanObject(0, ROUND16_MATCHCOUNT, false),
-        ],
-        finalsRankings: [createBooleanObject(0, 1, false)],
+        groupStageRankings: initializeGroupObject(groups, MAX_TEAMS_IN_GROUP),
+        thirdPlaceRankings: createBooleanArray(THIRDPLACE_MATHCOUNT),
+        round16Rankings: createBooleanArray(ROUND16_MATCHCOUNT),
+        quarterFinalsRankings: createBooleanArray(KNOCKOUT_MATCHCOUNT),
+        semiFinalsRankings: createBooleanArray(SEMIS_MATCHCOUNT),
+        finalsRankings: createBooleanArray(FINALS_MATCHCOUNT),
     })
 
     const wallet = useWallet()
@@ -69,10 +45,8 @@ export default function Prediction() {
                 subHeadingText="Select the final group positions"
             />
             <GroupStageTable
-                setUserSelection={setUserSelection}
-                userSelection={userSelection}
-                thirdPlaceRankings={thirdPlaceRankings}
-                setThirdPlaceRankings={setThirdPlaceRankings}
+                allUserSelections={allUserSelections}
+                setAllUserSelections={setAllUserSelections}
             />
             <Heading
                 count={2}
@@ -80,23 +54,23 @@ export default function Prediction() {
                 subHeadingText="Put your third place teams in order of best performance"
             />
             <ThirdPlaceRankings
-                userSelection={userSelection}
-                setThirdPlaceRankings={setThirdPlaceRankings}
-                thirdPlaceRankings={thirdPlaceRankings}
-                thirdPlaceUserSelection={thirdPlaceUserSelection}
-                setThirdPlaceUserSelection={setThirdPlaceUserSelection}
+                allUserSelections={allUserSelections}
+                setAllUserSelections={setAllUserSelections}
             />
             <Heading
                 count={3}
                 headingText="Round of 16"
                 subHeadingText="Choose your winners for each match"
             />
-            <button
-                className="text-white border flex justify-center items-center rounded-lg mx-auto px-3 py-2"
-                onClick={handleSubmit}
-            >
-                Submit Prediction
-            </button>
+            <Round16Standings
+                allUserSelections={allUserSelections}
+                setAllUserSelections={setAllUserSelections}
+            />
+            <Heading
+                count={4}
+                headingText="Quarter Finals"
+                subHeadingText="Choose your winners for each match"
+            />
         </Container>
     )
 }

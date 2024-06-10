@@ -2,8 +2,105 @@ import { Team } from './types/sharedtypes'
 
 export const groups: string[] = ['A', 'B', 'C', 'D', 'E', 'F']
 export const MAX_TEAMS_IN_GROUP = 4
+export const THIRDPLACE_MATHCOUNT = 6
 export const THIRD_PLACE_STANDING = 3
 export const ROUND16_MATCHCOUNT = 8
+export const KNOCKOUT_MATCHCOUNT = 4
+export const SEMIS_MATCHCOUNT = 2
+export const FINALS_MATCHCOUNT = 1
+export const ROUND16_STARTMATCH_NUM = 37
+export const WINNER = 0
+export const RUNNERUP = 1
+export const THIRDPLACED = 2
+export const FOURTHPLACE = 3
+
+export const ROUND16_FIXTURE_RULES = [
+    {
+        firstTeam: {
+            group: 'A',
+            position: WINNER,
+        },
+        secondTeam: {
+            group: 'C',
+            position: RUNNERUP,
+        },
+    },
+    {
+        firstTeam: {
+            group: 'A',
+            position: RUNNERUP,
+        },
+        secondTeam: {
+            group: 'B',
+            position: RUNNERUP,
+        },
+    },
+    {
+        firstTeam: {
+            group: 'B',
+            position: WINNER,
+        },
+        secondTeam: {
+            group: false,
+            thirdPlaceRanked: true,
+            position: WINNER,
+        },
+    },
+    {
+        firstTeam: {
+            group: 'C',
+            position: WINNER,
+        },
+        secondTeam: {
+            group: false,
+            thirdPlaceRanked: true,
+            position: FOURTHPLACE,
+        },
+    },
+    {
+        firstTeam: {
+            group: 'F',
+            position: WINNER,
+        },
+        secondTeam: {
+            group: false,
+            thirdPlaceRanked: true,
+            position: THIRDPLACED,
+        },
+    },
+    {
+        firstTeam: {
+            group: 'D',
+            position: RUNNERUP,
+        },
+        secondTeam: {
+            group: 'E',
+            position: RUNNERUP,
+        },
+    },
+    {
+        firstTeam: {
+            group: 'E',
+            position: WINNER,
+        },
+        secondTeam: {
+            group: false,
+            thirdPlaceRanked: true,
+            position: RUNNERUP,
+        },
+    },
+    {
+        firstTeam: {
+            group: 'D',
+            position: WINNER,
+        },
+        secondTeam: {
+            group: 'F',
+            position: RUNNERUP,
+        },
+    },
+]
+
 export const teams: Team[] = [
     {
         name: 'Germany',
@@ -174,9 +271,3 @@ export const teams: Team[] = [
         shortName: 'CZE',
     },
 ]
-
-export const knockStageRules = {
-    /*
-        GroupA Winner vs Group B Winner
-     */
-}

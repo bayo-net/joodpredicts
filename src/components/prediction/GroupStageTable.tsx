@@ -1,57 +1,85 @@
 'use client'
 
-import { groups, teams } from '@/constant'
 import { Team } from '@/types/sharedtypes'
 import Image from 'next/image'
 import { v4 as uuidv4 } from 'uuid'
 import * as _ from 'lodash'
-import { merge } from '@/utils'
-import { MdDelete } from 'react-icons/md'
+import { groupCountriesMap, merge } from '@/utils'
 import { Standings } from './Standings'
+import { DeleteIcon } from '../DeleteIcon'
 
 interface GroupStageTableProps {
-    setUserSelection: any
-    userSelection: any
-    thirdPlaceRankings: any
-    setThirdPlaceRankings: any
+    allUserSelections: any
+    setAllUserSelections: any
 }
 
 export const GroupStageTable: React.FC<GroupStageTableProps> = ({
-    setUserSelection,
-    userSelection,
-    thirdPlaceRankings,
-    setThirdPlaceRankings,
+    allUserSelections,
+    setAllUserSelections,
 }) => {
+    const allTeams = groupCountriesMap()
     const checkIfAlreadySelected = (team: Team) => {
-        return Object.keys(userSelection[team.group]).some(
-            (entry) => userSelection[team.group][entry].code === team.code
+        const groupStageRankings = allUserSelections['groupStageRankings']
+        return Object.keys(groupStageRankings[team.group]).some(
+            (entry) => groupStageRankings[team.group][entry].code === team.code
         )
+        return false
     }
 
     const handleDelete = (team: Team) => {
-        setUserSelection((prevState: any) => {
+        setAllUserSelections((prevState: any) => {
             const newState = _.cloneDeep(prevState)
-
-            if (newState.hasOwnProperty(team.group)) {
-                for (let key in newState[team.group]) {
-                    if (newState[team.group][key].code === team.code) {
-                        newState[team.group][key] = false
+            let deletedItemTeamCode
+            // effect group state rankings
+            const groupStageRankings = newState.groupStageRankings
+            if (groupStageRankings.hasOwnProperty(team.group)) {
+                for (let key in groupStageRankings[team.group]) {
+                    if (
+                        groupStageRankings[team.group][key].code === team.code
+                    ) {
+                        deletedItemTeamCode =
+                            groupStageRankings[team.group][key].code
+                        groupStageRankings[team.group][key] = false
                         break
                     }
                 }
             }
+
+            console.log('deletedItemTeamCode', deletedItemTeamCode)
+            // effect thirdplace rankings
+            const thirdPlaceRankingsFromUserSelection =
+                newState.thirdPlaceRankings
+            for (let team in thirdPlaceRankingsFromUserSelection) {
+                console.log(
+                    'thirdPlaceRankingsFromUserSelection',
+                    thirdPlaceRankingsFromUserSelection[team]
+                )
+                if (
+                    thirdPlaceRankingsFromUserSelection[team] &&
+                    thirdPlaceRankingsFromUserSelection[team].code ===
+                        deletedItemTeamCode
+                ) {
+                    console.log('came here')
+                    thirdPlaceRankingsFromUserSelection[team] = false
+                }
+                break
+            }
             return newState
         })
     }
+
+    console.log('thirdPlaceRankingsFromUserSelection', allUserSelections)
 
     const handleSelection = (team: Team) => {
-        setUserSelection((prevState: any) => {
+        setAllUserSelections((prevState: any) => {
             const newState = _.cloneDeep(prevState)
 
-            if (newState.hasOwnProperty(team.group)) {
-                for (let key in newState[team.group]) {
-                    if (newState[team.group][key] === false) {
-                        newState[team.group][key] = team
+            // Set state for group stage rankings
+            const groupStageRankings = newState.groupStageRankings
+            if (groupStageRankings.hasOwnProperty(team.group)) {
+                for (let key in groupStageRankings[team.group]) {
+                    if (groupStageRankings[team.group][key] === false) {
+                        groupStageRankings[team.group][key] = team
                         break
                     }
                 }
@@ -61,38 +89,36 @@ export const GroupStageTable: React.FC<GroupStageTableProps> = ({
         })
     }
 
-    const allTeamsGroupByName: any[] = []
-    groups.forEach((group) => {
-        const teamsByGroup = teams.filter((team: Team) => team.group === group)
-        allTeamsGroupByName.push(teamsByGroup)
-    })
-
     const PopulateStandings = ({ group }: { group: string }) => {
-        return userSelection[group].map((team: Team, index: number) => (
-            <Standings>
-                <p className="font-[500] text-[#949494]">{`${index + 1}.`}</p>
-                {team && (
-                    <div
-                        className="flex flex-row gap-2 pl-5 items-center"
-                        key={uuidv4()}
-                    >
-                        <Image
-                            src={team.url}
-                            width={15}
-                            height={20}
-                            alt="flag"
-                        />
-                        <p className="text-[12px]">{team.name}</p>
+        return allUserSelections['groupStageRankings'][group].map(
+            (team: Team, index: number) => (
+                <Standings>
+                    <p className="font-[500] text-[#949494]">{`${
+                        index + 1
+                    }.`}</p>
+                    {team && (
                         <div
-                            className="absolute right-0 pr-4"
-                            onClick={() => handleDelete(team)}
+                            className="flex flex-row gap-2 pl-5 items-center"
+                            key={uuidv4()}
                         >
-                            <MdDelete className="w-5 h-5 cursor-pointer" />
+                            <Image
+                                src={team.url}
+                                width={15}
+                                height={20}
+                                alt="flag"
+                            />
+                            <p className="text-[12px]">{team.name}</p>
+                            <div
+                                className="absolute right-0 pr-4"
+                                onClick={() => handleDelete(team)}
+                            >
+                                <DeleteIcon />
+                            </div>
                         </div>
-                    </div>
-                )}
-            </Standings>
-        ))
+                    )}
+                </Standings>
+            )
+        )
     }
 
     return (
@@ -106,7 +132,7 @@ export const GroupStageTable: React.FC<GroupStageTableProps> = ({
                 pb-5
                 "
         >
-            {allTeamsGroupByName.map((teamsByGroup) => (
+            {allTeams.map((teamsByGroup) => (
                 <div
                     className="flex flex-col border-[0.5px] border-[#242424] bg-[#171616] px-3 py-2 rounded-lg"
                     key={uuidv4()}
