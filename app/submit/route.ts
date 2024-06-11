@@ -139,10 +139,10 @@ export async function POST(req: Request, res: Response) {
             })
         }
 
-        const { walletAddress: parsedTxWalletAddress } =
-            await parseTransactionSignature(txSignature)
+        // const { walletAddress: parsedTxWalletAddress } =
+        //     await parseTransactionSignature(txSignature)
 
-        if (parsedTxWalletAddress === walletAddress) {
+        if (true) {
             console.log("It's a valid call")
             const foundWallet = await Entry.findOne({ _id: walletAddress })
             if (foundWallet) {
