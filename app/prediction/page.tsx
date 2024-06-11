@@ -3,7 +3,6 @@
 import {
     FINALS_MATCHCOUNT,
     groups,
-    JOOD_MINT_ADDRESS,
     JoodTokenAddress,
     KNOCKOUT_MATCHCOUNT,
     MAX_TEAMS_IN_GROUP,
@@ -52,6 +51,7 @@ import { useEffect, useState } from 'react'
 import { Toaster, toast } from 'sonner'
 import { Disclaimer } from '@/src/components/Disclaimer'
 import { LoadingSpinner } from '@/src/components/LoadingSpinner'
+import { useRouter } from 'next/navigation'
 
 export default function Prediction() {
     const wallet = useWallet()
@@ -68,95 +68,104 @@ export default function Prediction() {
     const [isOpenModal, setOpenModal] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const connection = new Connection(rpcEndPointUrl, 'confirmed')
+    const router = useRouter()
 
     const doTransfer = async () => {
-        if (!wallet.publicKey || !wallet.signTransaction)
-            throw new WalletNotConnectedError('Please connect a wallet.')
+        try {
+            if (!wallet.publicKey || !wallet.signTransaction)
+                throw new WalletNotConnectedError('Please connect a wallet.')
 
-        const splToken = new PublicKey(JoodTokenAddress)
-        const mintInfo = await getMint(connection, splToken)
-        if (!mintInfo) {
-            throw new Error('Invalid token')
-        }
+            const splToken = new PublicKey(JoodTokenAddress)
+            const mintInfo = await getMint(connection, splToken)
+            if (!mintInfo) {
+                throw new Error('Invalid token')
+            }
 
-        const amountBN = TOKEN_FEE * Math.pow(10, mintInfo.decimals)
-        // Get the token account of the fromWallet Solana address, if it does not exist, create it
-        const fromTokenAccount = await getOrCreateAssociatedTokenAccount(
-            connection,
-            wallet.publicKey,
-            splToken,
-            wallet.publicKey,
-            wallet.signTransaction
-        )
-
-        const toTokenAccount = await getOrCreateAssociatedTokenAccount(
-            connection,
-            wallet.publicKey,
-            splToken,
-            receiverWallet,
-            wallet.signTransaction
-        )
-
-        const transaction = new Transaction().add(
-            createTransferInstruction(
-                fromTokenAccount.address, // source
-                toTokenAccount.address, // dest
+            const amountBN = TOKEN_FEE * Math.pow(10, mintInfo.decimals)
+            // Get the token account of the fromWallet Solana address, if it does not exist, create it
+            const fromTokenAccount = await getOrCreateAssociatedTokenAccount(
+                connection,
                 wallet.publicKey,
-                amountBN,
-                [],
-                TOKEN_PROGRAM_ID
+                splToken,
+                wallet.publicKey,
+                wallet.signTransaction
             )
-        )
 
-        const txData = {
-            store: 'COINGOAL',
-            type: 'prediction',
-            walletAddress: wallet.publicKey,
-        }
-
-        transaction.add(
-            new TransactionInstruction({
-                keys: [
-                    {
-                        pubkey: wallet.publicKey,
-                        isSigner: true,
-                        isWritable: true,
-                    },
-                ],
-                data: Buffer.from(
-                    JSON.stringify(txData).replace(' ', ''),
-                    'utf8'
-                ),
-                programId: MEMO_PROGRAM_ID,
-            })
-        )
-
-        if (fromTokenAccount.amount < TOKEN_FEE) {
-            throw new Error('Balance is not enough.')
-        }
-
-        const latestBlockHash = await connection.getLatestBlockhash()
-        transaction.feePayer = wallet.publicKey
-        transaction.recentBlockhash = latestBlockHash.blockhash
-
-        const walletSignedTx = await wallet.signTransaction(transaction)
-        const signature = await executeTransaction(
-            connection,
-            walletSignedTx.serialize(),
-            latestBlockHash
-        )
-
-        if (!signature) {
-            throw new Error(
-                `Transaction failed due to Solana network congestion, please try again.`
+            const toTokenAccount = await getOrCreateAssociatedTokenAccount(
+                connection,
+                wallet.publicKey,
+                splToken,
+                receiverWallet,
+                wallet.signTransaction
             )
-        }
 
-        return signature
+            const transaction = new Transaction().add(
+                createTransferInstruction(
+                    fromTokenAccount.address, // source
+                    toTokenAccount.address, // dest
+                    wallet.publicKey,
+                    amountBN,
+                    [],
+                    TOKEN_PROGRAM_ID
+                )
+            )
+
+            const txData = {
+                store: 'COINGOAL',
+                type: 'prediction',
+                walletAddress: wallet.publicKey,
+            }
+
+            transaction.add(
+                new TransactionInstruction({
+                    keys: [
+                        {
+                            pubkey: wallet.publicKey,
+                            isSigner: true,
+                            isWritable: true,
+                        },
+                    ],
+                    data: Buffer.from(
+                        JSON.stringify(txData).replace(' ', ''),
+                        'utf8'
+                    ),
+                    programId: MEMO_PROGRAM_ID,
+                })
+            )
+
+            if (fromTokenAccount.amount < TOKEN_FEE) {
+                throw new Error('Balance is not enough.')
+            }
+
+            const latestBlockHash = await connection.getLatestBlockhash()
+            transaction.feePayer = wallet.publicKey
+            transaction.recentBlockhash = latestBlockHash.blockhash
+
+            const walletSignedTx = await wallet.signTransaction(transaction)
+            const signature = await executeTransaction(
+                connection,
+                walletSignedTx.serialize(),
+                latestBlockHash
+            )
+
+            if (!signature) {
+                toast.error(
+                    'Transaction failed due to Solana network congestion, please try again.'
+                )
+                throw new Error(
+                    `Transaction failed due to Solana network congestion, please try again.`
+                )
+            }
+            return signature
+        } catch (err) {
+            toast.error(`Error while processing transaction.. ${err}`)
+            setIsLoading(false)
+            setOpenModal(false)
+            return null
+        }
     }
 
     const handleSubmit = async () => {
-        console.log('submit', wallet.connected)
         const isValid = validateSubmit(allUserSelections, wallet)
         if (isValid) {
             setOpenModal(true)
@@ -166,6 +175,7 @@ export default function Prediction() {
 
     const handleApprove = async () => {
         try {
+            // await fetch('/getPredictions')
             setIsLoading(true)
             const allTokens = await fetchAllSplTokens(
                 wallet?.publicKey?.toBase58()!,
@@ -175,19 +185,61 @@ export default function Prediction() {
             if (!amountExists) {
                 toast.error('Not enough JOOD in the wallet')
             } else {
-                await doTransfer()
-                setIsLoading(false)
-                setOpenModal(false)
-                toast.success('Successfully submitted prediction')
+                const txSignature = await doTransfer()
+                if (!txSignature) {
+                    return
+                }
+                const shareId = window && window.crypto.randomUUID()
+                const reqBody = {
+                    walletAddress: wallet?.publicKey,
+                    shareId,
+                    predictions: JSON.stringify(allUserSelections),
+                    txSignature,
+                }
+                const data = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(reqBody),
+                })
+                if (data.status === 200) {
+                    toast.success('Successfully submitted prediction')
+                    router.push(`/prediction/${shareId}`)
+                } else {
+                    toast.error(
+                        `Failed to save prediction: ${await data.json()}`
+                    )
+                }
             }
         } catch (err) {
             console.log('error', err)
+        } finally {
+            // save the record to database
+            setIsLoading(false)
+            setOpenModal(false)
+            // Navigate to the predictions page if needed
         }
     }
 
     if (isLoading) {
         toast.info('Please approve transaction in the wallet')
     }
+
+    useEffect(() => {
+        async function getData() {
+            if (wallet.connected) {
+                const data = await fetch(
+                    `./getPredictions?walletAddress=${wallet?.publicKey}`
+                )
+                if (data.status === 200) {
+                    const record = await data.json()
+                    router.push(`/prediction/${record.shareId}`)
+                }
+            }
+        }
+        getData()
+    }, [wallet])
 
     return (
         <Container>

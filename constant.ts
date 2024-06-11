@@ -18,7 +18,6 @@ export const FOURTHPLACE = 3
 export const QUARTERS_STARTMATCH_NUM = 45
 export const SEMIS_STARTMATCH_NUM = 49
 export const FINALS_STARTMATCH_NUM = 51
-export const TOKEN_FEE = 100
 export const rpcEndPointUrl =
     'https://mainnet.helius-rpc.com/?api-key=6232281d-74e4-4046-af05-ab63e2360f2a'
 
@@ -379,9 +378,11 @@ export const JOOD_MINT_ADDRESS = new PublicKey(
     '6ouRmNFECtQgjwbwWqjiWGGZxY4DBAttoGtor5CWjTNm'
 )
 export const receiverWallet = new PublicKey(
-    'GUYcJBfjKMWxs9Ho4MvvEh5dCy3CaQaAcfcXB8KR6CUN'
+    'FycTVkMxpjQ1SXtdKUT3n8RseJZEx2BkFeVC83gaBFjY'
 )
 
 export const MEMO_PROGRAM_ID = new PublicKey(
     'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr'
 )
+
+export const TOKEN_FEE = 2500

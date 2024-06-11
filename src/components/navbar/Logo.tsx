@@ -7,7 +7,7 @@ export const Logo = () => {
             <div className="flex flex-row text-sm text-gray-500 gap-1">
                 <p>by</p>
                 <img
-                    src="./logo.png"
+                    src="/logo.png"
                     width={20}
                     height={20}
                     alt="jood_logo"

@@ -114,7 +114,6 @@ export const validateSubmit = (
     wallet: WalletContextState
 ) => {
     try {
-        console.log('is wallet connected', wallet.connected)
         if (!wallet.connected) {
             toast.error('Connect your wallet to submit')
             return false

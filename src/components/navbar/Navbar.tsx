@@ -5,6 +5,10 @@ import { Container } from '../Container'
 import { Logo } from './Logo'
 import { UserMenu } from './UserMenu'
 import dynamic from 'next/dynamic'
+import { BsTelegram, BsTwitterX } from 'react-icons/bs'
+import { FaTelegramPlane } from 'react-icons/fa'
+import { CgWebsite } from 'react-icons/cg'
+import { PiTelegramLogo } from 'react-icons/pi'
 
 interface NavbarProps {
     item: String
@@ -26,6 +30,24 @@ export const Navbar = () => {
                         <div className="flex flex-row items-center gap-4">
                             <Logo />
                             <UserMenu />
+                        </div>
+                        <div className="flex flex-row justify-center items-center gap-4">
+                            Follow us on:
+                            <a
+                                href="https://x.com/joodonsol"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <BsTwitterX className="cursor-pointer w-4 h-4" />
+                            </a>
+                            <a
+                                href="https://t.me/joodonsol"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <BsTelegram className="cursor-pointer w-4 h-4" />
+                            </a>
+                            {/* <CgWebsite className="cursor-pointer" /> */}
                         </div>
                         <WalletMultiButtonDynamic />
                     </div>
