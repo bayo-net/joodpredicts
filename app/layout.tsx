@@ -10,8 +10,11 @@ require('@solana/wallet-adapter-react-ui/styles.css')
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-    title: 'Euro 2024 Predictor',
-    description: 'Euro 2024 Predictor',
+    title: 'JOODPredicts',
+    description: 'JOODPredicts by JOODonSOL',
+    icons: {
+        icon: '/logo.png', // /public path
+    },
 }
 
 export default function RootLayout({

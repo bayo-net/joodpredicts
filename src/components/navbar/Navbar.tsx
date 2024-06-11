@@ -32,7 +32,6 @@ export const Navbar = () => {
                             <UserMenu />
                         </div>
                         <div className="flex flex-row justify-center items-center gap-4">
-                            Follow us on:
                             <a
                                 href="https://x.com/joodonsol"
                                 target="_blank"
@@ -46,6 +45,17 @@ export const Navbar = () => {
                                 rel="noopener"
                             >
                                 <BsTelegram className="cursor-pointer w-4 h-4" />
+                            </a>
+                            <a
+                                href="https://dexscreener.com/solana/huwamsh3x6vtsm73unemsmfn4ygf4kfdne8ahy6ez5ly"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <img
+                                    src="dex-screener.png"
+                                    alt="dexscreener"
+                                    className="rounded-full w-6 h-6"
+                                />
                             </a>
                             {/* <CgWebsite className="cursor-pointer" /> */}
                         </div>

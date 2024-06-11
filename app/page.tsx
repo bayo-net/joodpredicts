@@ -16,7 +16,8 @@ export default function Home() {
             <Head>
                 <title>JOODPredicts</title>
                 <meta name="description" content="JOODPredicts by JOODonSOL" />
-                <link rel="icon" href="icons/logo.png" />
+                <link rel="short icon" href="logo.png" />
+                <link rel="icon" href="logo.png" />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
