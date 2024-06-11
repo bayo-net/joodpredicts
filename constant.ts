@@ -385,4 +385,4 @@ export const MEMO_PROGRAM_ID = new PublicKey(
     'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr'
 )
 
-export const TOKEN_FEE = 100
+export const TOKEN_FEE = 10
