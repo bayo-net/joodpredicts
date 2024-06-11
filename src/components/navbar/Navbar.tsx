@@ -27,24 +27,24 @@ export const Navbar = () => {
             <div className="py-3 border-b border-b-gray-800 backdrop-blur-sm">
                 <Container>
                     <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
-                        <div className="flex flex-row items-center gap-4">
+                        <div className="flex flex-row items-center gap-2 sm:gap-4">
                             <Logo />
                             <UserMenu />
                         </div>
-                        <div className="flex flex-row justify-center items-center gap-4">
+                        <div className="flex flex-row justify-center items-center gap-2 sm:gap-4">
                             <a
                                 href="https://x.com/joodonsol"
                                 target="_blank"
                                 rel="noopener"
                             >
-                                <BsTwitterX className="cursor-pointer w-4 h-4" />
+                                <BsTwitterX className="cursor-pointer w-3 h-3 sm:w-4 sm:h-4" />
                             </a>
                             <a
                                 href="https://t.me/joodonsol"
                                 target="_blank"
                                 rel="noopener"
                             >
-                                <BsTelegram className="cursor-pointer w-4 h-4" />
+                                <BsTelegram className="cursor-pointer  w-3 h-3 sm:w-4 sm:h-4" />
                             </a>
                             <a
                                 href="https://dexscreener.com/solana/huwamsh3x6vtsm73unemsmfn4ygf4kfdne8ahy6ez5ly"
@@ -54,7 +54,7 @@ export const Navbar = () => {
                                 <img
                                     src="dex-screener.png"
                                     alt="dexscreener"
-                                    className="rounded-full w-6 h-6"
+                                    className="hidden sm:visible rounded-full w-6 h-6"
                                 />
                             </a>
                             {/* <CgWebsite className="cursor-pointer" /> */}

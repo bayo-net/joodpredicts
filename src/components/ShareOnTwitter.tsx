@@ -28,8 +28,8 @@ cursor-pointer
 "
             target="_blank"
             rel="noopener"
-            href={`https://twitter.com/intent/tweet?text=Here is my JOODPredicts EURO Cup Bracket Submission ${url1}, try out JOODPredicts
-            for EURO CUP 2024 here ${url2}`}
+            href={`https://twitter.com/intent/tweet?text=Here is my JOODPredicts EURO Cup Bracket Submission ${url1}
+            Buy $JOOD and try it out here: ${url2}`}
             data-size="large"
         >
             Share on

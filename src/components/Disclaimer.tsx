@@ -1,5 +1,6 @@
 'use client'
 
+import { TOKEN_FEE } from '@/constant'
 import { GiCancel } from 'react-icons/gi'
 import { SiTicktick } from 'react-icons/si'
 
@@ -25,9 +26,9 @@ export const Disclaimer: React.FC<DisclaimerProps> = ({
                 Hold $JOOD to participate
             </h1>
             <h1 className="text-wrap mt-2 p-5">
-                This will cost 2,000 $JOOD to submit your bracket and
+                {`This will cost ${TOKEN_FEE} $JOOD to submit your bracket and
                 participate in the prizes. Please click Agree to proceed with
-                transaction
+                transaction`}
             </h1>
             <div className="flex flex-row justify-end mt-4 w-full gap-3">
                 <button

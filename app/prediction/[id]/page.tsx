@@ -59,8 +59,8 @@ export default function Prediction() {
                 <div className="flex flex-row items-center justify-center gap-2">
                     <h1 className="text-xl">Your Saved Bracket</h1>
                     <ShareOnTwiiter
-                        url1={`https://coingoal.vercel.app/prediction/${id}`}
-                        url2={`https://coingoal.vercel.app/prediction`}
+                        url1={`https://www.joodpredicts.xyz/prediction/${id}`}
+                        url2={`https://www.joodpredicts.xyz/prediction`}
                     />
                 </div>
             </div>
