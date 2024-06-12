@@ -13,7 +13,20 @@ export const metadata: Metadata = {
     title: 'JOODPredicts',
     description: 'JOODPredicts by JOODonSOL',
     icons: {
-        icon: '/logo.png', // /public path
+        icon: '/thumbnail.png', // /public path
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'JOODPredicts',
+        description: 'JOODPredicts by JOODonSOL',
+        images: [
+            {
+                url: '/icons/twitter-image.png',
+                width: 1200,
+                height: 630,
+                alt: 'sponsors',
+            },
+        ],
     },
 }
 
