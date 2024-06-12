@@ -11,6 +11,7 @@ import {
 } from '@/constant'
 import { Container } from '@/src/components/Container'
 import { ShareOnTwiiter } from '@/src/components/ShareOnTwitter'
+import { SocialMediaLinks } from '@/src/components/SocialMediaLinks'
 import { Heading } from '@/src/components/header/Heading'
 import { Finals } from '@/src/components/prediction/Finals'
 import { GroupStageTable } from '@/src/components/prediction/GroupStageTable'
@@ -122,6 +123,9 @@ export default function Prediction() {
                     />
                     <Toaster position="top-center" richColors />
                 </Container>
+                <div className="sm:hidden">
+                    <SocialMediaLinks />
+                </div>
             </div>
         </div>
     )

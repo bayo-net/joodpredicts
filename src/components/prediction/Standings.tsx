@@ -10,20 +10,18 @@ export const Standings: React.FC<StandingsProps> = ({ children }) => {
     return (
         <div
             className="
-        border-dashed
-        px-4
-        py-3
-        hover:bg-slate-600
-        rounded-sm
-        transition
-        duration-500
-        flex
-        flex-row
-        items-center
-        border-b-2
-        border-b-[#949494]
-        relative
-        "
+            border-b-[0.5px]
+            border-dashed
+            px-4
+            py-3
+            rounded-sm
+            transition
+            duration-500
+            flex
+            flex-row
+            items-center
+            relative
+            "
             key={uuidv4()}
         >
             {children}

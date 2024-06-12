@@ -9,6 +9,7 @@ import { BsTelegram, BsTwitterX } from 'react-icons/bs'
 import { FaTelegramPlane } from 'react-icons/fa'
 import { CgWebsite } from 'react-icons/cg'
 import { PiTelegramLogo } from 'react-icons/pi'
+import { SocialMediaLinks } from '../SocialMediaLinks'
 
 interface NavbarProps {
     item: String
@@ -31,35 +32,10 @@ export const Navbar = () => {
                             <Logo />
                             <UserMenu />
                         </div>
-                        <div className="flex flex-row justify-center items-center gap-2 sm:gap-4">
-                            <a
-                                href="https://x.com/joodonsol"
-                                target="_blank"
-                                rel="noopener"
-                            >
-                                <BsTwitterX className="cursor-pointer w-3 h-3 sm:w-4 sm:h-4" />
-                            </a>
-                            <a
-                                href="https://t.me/joodonsol"
-                                target="_blank"
-                                rel="noopener"
-                            >
-                                <BsTelegram className="cursor-pointer  w-3 h-3 sm:w-4 sm:h-4" />
-                            </a>
-                            <a
-                                href="https://dexscreener.com/solana/huwamsh3x6vtsm73unemsmfn4ygf4kfdne8ahy6ez5ly"
-                                target="_blank"
-                                rel="noopener"
-                            >
-                                <img
-                                    src="dex-screener.png"
-                                    alt="dexscreener"
-                                    className="hidden sm:visible rounded-full w-6 h-6"
-                                />
-                            </a>
-                            {/* <CgWebsite className="cursor-pointer" /> */}
+                        <div className="flex flex-row gap-3">
+                            <SocialMediaLinks />
+                            <WalletMultiButtonDynamic className="text-red" />
                         </div>
-                        <WalletMultiButtonDynamic />
                     </div>
                 </Container>
             </div>

@@ -52,6 +52,8 @@ import { Toaster, toast } from 'sonner'
 import { Disclaimer } from '@/src/components/Disclaimer'
 import { LoadingSpinner } from '@/src/components/LoadingSpinner'
 import { useRouter } from 'next/navigation'
+import { SocialMediaLinks } from '@/src/components/SocialMediaLinks'
+import { BsTelegram, BsTwitterX } from 'react-icons/bs'
 
 export default function Prediction() {
     const wallet = useWallet()
@@ -242,70 +244,71 @@ export default function Prediction() {
     }, [wallet])
 
     return (
-        <Container>
-            <Heading
-                count={1}
-                headingText="Select Group Stage"
-                subHeadingText="Select the final group positions"
-            />
-            <GroupStageTable
-                allUserSelections={allUserSelections}
-                setAllUserSelections={setAllUserSelections}
-            />
-            <Heading
-                count={2}
-                headingText="Third Place Rankings"
-                subHeadingText="Put your third place teams in order of best performance"
-            />
-            <ThirdPlaceRankings
-                allUserSelections={allUserSelections}
-                setAllUserSelections={setAllUserSelections}
-            />
-            <Heading
-                count={3}
-                headingText="Round of 16"
-                subHeadingText="Choose your winners for each match"
-            />
-            <Round16Standings
-                allUserSelections={allUserSelections}
-                setAllUserSelections={setAllUserSelections}
-            />
-            <Heading
-                count={4}
-                headingText="Quarter Finals"
-                subHeadingText="Choose your winners for each match"
-            />
-            <QuarterFinalsStandings
-                setAllUserSelections={setAllUserSelections}
-                allUserSelections={allUserSelections}
-            />
-            <Heading
-                count={5}
-                headingText="Semi-Finals"
-                subHeadingText="Choose your winners for each match"
-            />
-            <SemiFinalStandings
-                setAllUserSelections={setAllUserSelections}
-                allUserSelections={allUserSelections}
-            />
-            <Heading
-                count={6}
-                headingText="Finals"
-                subHeadingText="Choose your winner"
-            />
-            <Finals
-                setAllUserSelections={setAllUserSelections}
-                allUserSelections={allUserSelections}
-            />
-            <div
-                className="
+        <div className="relative">
+            <Container>
+                <Heading
+                    count={1}
+                    headingText="Select Group Stage"
+                    subHeadingText="Select the final group positions"
+                />
+                <GroupStageTable
+                    allUserSelections={allUserSelections}
+                    setAllUserSelections={setAllUserSelections}
+                />
+                <Heading
+                    count={2}
+                    headingText="Third Place Rankings"
+                    subHeadingText="Put your third place teams in order of best performance"
+                />
+                <ThirdPlaceRankings
+                    allUserSelections={allUserSelections}
+                    setAllUserSelections={setAllUserSelections}
+                />
+                <Heading
+                    count={3}
+                    headingText="Round of 16"
+                    subHeadingText="Choose your winners for each match"
+                />
+                <Round16Standings
+                    allUserSelections={allUserSelections}
+                    setAllUserSelections={setAllUserSelections}
+                />
+                <Heading
+                    count={4}
+                    headingText="Quarter Finals"
+                    subHeadingText="Choose your winners for each match"
+                />
+                <QuarterFinalsStandings
+                    setAllUserSelections={setAllUserSelections}
+                    allUserSelections={allUserSelections}
+                />
+                <Heading
+                    count={5}
+                    headingText="Semi-Finals"
+                    subHeadingText="Choose your winners for each match"
+                />
+                <SemiFinalStandings
+                    setAllUserSelections={setAllUserSelections}
+                    allUserSelections={allUserSelections}
+                />
+                <Heading
+                    count={6}
+                    headingText="Finals"
+                    subHeadingText="Choose your winner"
+                />
+                <Finals
+                    setAllUserSelections={setAllUserSelections}
+                    allUserSelections={allUserSelections}
+                />
+                <div
+                    className="
                 flex
                 justify-center
                 items-center
                 mt-5"
-            >
-                <button
-                    className="
+                >
+                    <button
+                        className="
                 px-3
                 py-2
                 rounded-lg
@@ -316,32 +319,62 @@ export default function Prediction() {
                 border-[0.5px]
                 border-[#407ED2]
                 "
-                    onClick={handleSubmit}
-                >
-                    Submit Bracket
-                </button>
-                {isOpenModal && (
-                    <Modal
-                        isOpen={isOpenModal}
-                        handleClose={() => {
-                            setOpenModal(false)
-                        }}
-                        className="m-5 p-5 bg-[#242424] rounded-3xl shadow-lg px-8 w-[40vh] sm:w-[70vh] mx-auto"
+                        onClick={handleSubmit}
                     >
-                        {!isLoading && (
-                            <Disclaimer
-                                handleClose={() => {
-                                    setOpenModal(false)
-                                }}
-                                handleApprove={handleApprove}
+                        Submit Bracket
+                    </button>
+                    {isOpenModal && (
+                        <Modal
+                            isOpen={isOpenModal}
+                            handleClose={() => {
+                                setOpenModal(false)
+                            }}
+                            className="m-5 p-5 bg-[#242424] rounded-3xl shadow-lg px-8 w-[40vh] sm:w-[70vh] mx-auto"
+                        >
+                            {!isLoading && (
+                                <Disclaimer
+                                    handleClose={() => {
+                                        setOpenModal(false)
+                                    }}
+                                    handleApprove={handleApprove}
+                                />
+                            )}
+                            {isLoading && <LoadingSpinner />}
+                        </Modal>
+                    )}
+                </div>
+                <Toaster position="top-center" richColors />
+                <div className="block sm:hidden absolute left-1/2 -translate-x-1/2 -bottom-14">
+                    <div className="flex flex-row justify-between items-center gap-4">
+                        <a
+                            href="https://x.com/joodonsol"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <BsTwitterX className="cursor-pointer w-4 h-4" />
+                        </a>
+                        <a
+                            href="https://t.me/joodonsol"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <BsTelegram className="cursor-pointer w-4 h-4" />
+                        </a>
+                        <a
+                            href="https://dexscreener.com/solana/huwamsh3x6vtsm73unemsmfn4ygf4kfdne8ahy6ez5ly"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <img
+                                src="dex-screener.png"
+                                alt="dexscreener"
+                                className="rounded-full w-6 h-6"
                             />
-                        )}
-                        {isLoading && <LoadingSpinner />}
-                    </Modal>
-                )}
-            </div>
-            <Toaster position="top-center" richColors />
-            <div id="modal-portal"></div>
-        </Container>
+                        </a>
+                    </div>
+                </div>
+                <div id="modal-portal"></div>
+            </Container>
+        </div>
     )
 }
