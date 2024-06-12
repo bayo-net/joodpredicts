@@ -54,6 +54,28 @@ import { LoadingSpinner } from '@/src/components/LoadingSpinner'
 import { useRouter } from 'next/navigation'
 import { SocialMediaLinks } from '@/src/components/SocialMediaLinks'
 import { BsTelegram, BsTwitterX } from 'react-icons/bs'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'JOODPredicts',
+    description: 'JOODPredicts by JOODonSOL',
+    icons: {
+        icon: '/thumbnail.png', // /public path
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'JOODPredicts',
+        description: 'JOODPredicts by JOODonSOL',
+        images: [
+            {
+                url: '/icons/twitter-image.png',
+                width: 1200,
+                height: 630,
+                alt: 'sponsors',
+            },
+        ],
+    },
+}
 
 export default function Prediction() {
     const wallet = useWallet()
