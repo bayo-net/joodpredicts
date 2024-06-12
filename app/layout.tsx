@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'JOODPredicts',
-        description: 'JOODPredicts by JOODonSOL',
+        title: 'JOODPredicts222',
+        description: 'JOODPredicts by JOODonSOL222',
         images: [
             {
                 url: 'https://pbs.twimg.com/media/GP4YflfbYAAx-kl?format=png&name=small',
