@@ -256,9 +256,7 @@ export default function Prediction() {
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta
                     name="twitter:url"
-                    content={
-                        'https://pbs.twimg.com/media/GPzBNA3XoAApr6C?format=jpg&name=large'
-                    }
+                    content="https://pbs.twimg.com/media/GPzBNA3XoAApr6C?format=jpg&name=large"
                 />
                 <meta name="twitter:title" content="JOODPredicts" />
                 <meta

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         description: 'JOODPredicts by JOODonSOL',
         images: [
             {
-                url: '/icons/twitter-image.png',
+                url: 'https://pbs.twimg.com/media/GP4YflfbYAAx-kl?format=png&name=small',
                 width: 1200,
                 height: 630,
                 alt: 'sponsors',
