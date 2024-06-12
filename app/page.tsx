@@ -15,7 +15,10 @@ export default function Home() {
         <>
             <Head>
                 <title>JOODPredicts</title>
-                <meta name="description" content="JOODPredicts by JOODonSOL" />
+                <meta
+                    name="description"
+                    content="JOODPredicts by JOODonSOLMeta2"
+                />
                 <link rel="short icon" href="logo.png" />
                 <link rel="icon" href="logo.png" />
 
@@ -27,16 +30,14 @@ export default function Home() {
                         'https://pbs.twimg.com/media/GPzBNA3XoAApr6C?format=jpg&name=large'
                     }
                 /> */}
-                <meta name="twitter:title" content="JOODPredicts" />
+                <meta name="twitter:title" content="JOODPredictsMeta2" />
                 <meta
                     name="twitter:description"
-                    content="JOODPredicts by JOODonSOL"
+                    content="JOODPredicts by JOODonSOLMeta2"
                 />
                 <meta
                     name="twitter:image"
-                    content={
-                        'https://pbs.twimg.com/media/GP4YflfbYAAx-kl?format=png&name=small'
-                    }
+                    content="https://pbs.twimg.com/media/GP4YflfbYAAx-kl?format=png&name=small"
                 />
             </Head>
             <main className="flex flex-col"></main>

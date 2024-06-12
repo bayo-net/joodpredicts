@@ -10,8 +10,8 @@ require('@solana/wallet-adapter-react-ui/styles.css')
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-    title: 'JOODPredicts',
-    description: 'JOODPredicts by JOODonSOL',
+    title: 'JOODPredicts344',
+    description: 'JOODPredicts by JOODonSOL423',
     icons: {
         icon: '/thumbnail.png', // /public path
     },

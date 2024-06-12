@@ -248,7 +248,10 @@ export default function Prediction() {
         <>
             <Head>
                 <title>JOODPredicts</title>
-                <meta name="description" content="JOODPredicts by JOODonSOL" />
+                <meta
+                    name="description"
+                    content="JOODPredicts by JOODonSOLMeta1"
+                />
                 <link rel="short icon" href="logo.png" />
                 <link rel="icon" href="logo.png" />
 
@@ -258,10 +261,10 @@ export default function Prediction() {
                     name="twitter:url"
                     content="https://pbs.twimg.com/media/GPzBNA3XoAApr6C?format=jpg&name=large"
                 />
-                <meta name="twitter:title" content="JOODPredicts" />
+                <meta name="twitter:title" content="JOODPredictsMeta1" />
                 <meta
-                    name="twitter:description"
-                    content="JOODPredicts by JOODonSOL"
+                    name="twitter:descriptionMeta1"
+                    content="JOODPredicts by JOODonSOLMeta1"
                 />
                 <meta
                     name="twitter:image"
