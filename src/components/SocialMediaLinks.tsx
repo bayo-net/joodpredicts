@@ -16,7 +16,7 @@ export const SocialMediaLinks: React.FC<{}> = () => (
             rel="noopener"
         >
             <img
-                src="dex-screener.png"
+                src="/dex-screener.png"
                 alt="dexscreener"
                 className="hidden sm:block rounded-full w-6 h-6"
             />
