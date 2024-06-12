@@ -20,20 +20,20 @@ export default function Home() {
                 <link rel="icon" href="logo.png" />
 
                 {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
+                <meta name="twitter:card" content="summary_large_image" />
                 {/* <meta
                     property="twitter:url"
                     content={
                         'https://pbs.twimg.com/media/GPzBNA3XoAApr6C?format=jpg&name=large'
                     }
                 /> */}
-                <meta property="twitter:title" content="JOODPredicts" />
+                <meta name="twitter:title" content="JOODPredicts" />
                 <meta
-                    property="twitter:description"
+                    name="twitter:description"
                     content="JOODPredicts by JOODonSOL"
                 />
                 <meta
-                    property="twitter:image"
+                    name="twitter:image"
                     content={
                         'https://pbs.twimg.com/media/GP4YflfbYAAx-kl?format=png&name=small'
                     }
