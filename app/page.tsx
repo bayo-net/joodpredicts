@@ -32,7 +32,12 @@ export default function Home() {
                     property="twitter:description"
                     content="JOODPredicts by JOODonSOL"
                 />
-                <meta property="twitter:image" content={'thumbnail.png'} />
+                <meta
+                    property="twitter:image"
+                    content={
+                        'https://pbs.twimg.com/media/GP4YflfbYAAx-kl?format=png&name=small'
+                    }
+                />
             </Head>
             <main className="flex flex-col"></main>
         </>
