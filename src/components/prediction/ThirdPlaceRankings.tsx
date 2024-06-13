@@ -53,7 +53,7 @@ export const ThirdPlaceRankings: React.FC<ThirdPlaceRankingsProps> = ({
     const handleDelete = (selectedIndex: any) => {
         setAllUserSelections((prevState: any) => {
             const newState = _.cloneDeep(prevState)
-            const { thirdPlaceRankings } = allUserSelections
+            const { thirdPlaceRankings } = newState
             thirdPlaceRankings[selectedIndex] = false
             return newState
         })
