@@ -115,8 +115,6 @@ export async function POST(req: Request, res: Response) {
         const { walletAddress, shareId, predictions, txSignature } =
             await req.json()
 
-        console.log('fetched things')
-
         if (!walletAddress) {
             console.log('wallet address missing')
             return new Response('Wallet Address missing', { status: 403 })
@@ -146,10 +144,14 @@ export async function POST(req: Request, res: Response) {
             console.log("It's a valid call")
             const foundWallet = await Entry.findOne({ _id: walletAddress })
             if (foundWallet) {
+                console.log(
+                    'wallet address' + walletAddress + ' already exists'
+                )
                 return new Response('Wallet address already exists', {
                     status: 403,
                 })
             } else {
+                console.log('adding entry to the db' + walletAddress)
                 const entryAdded = await new Entry({
                     _id: walletAddress,
                     shareId,
