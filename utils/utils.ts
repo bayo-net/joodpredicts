@@ -261,3 +261,11 @@ export const executeTransaction = async (
 
     return txid
 }
+
+export const trimWalletAddress = (walletAddress: string) => {
+    if (walletAddress) {
+        return walletAddress.length > 12
+            ? `${walletAddress.substring(0, 12)}..`
+            : walletAddress
+    }
+}

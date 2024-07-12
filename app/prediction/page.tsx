@@ -345,7 +345,7 @@ export default function Prediction() {
                 text-sm
                 text-[#F9F9F9]
                 border-[0.5px]
-                border-[#407ED2]
+border-[#407ED2]
                 "
                                 onClick={handleSubmit}
                             >

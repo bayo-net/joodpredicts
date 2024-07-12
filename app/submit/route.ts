@@ -1,5 +1,3 @@
-// This is an example of to protect an API route
-import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from '@/utils/dbConnect'
 import { rpcEndPointUrl } from '@/constant'
 import fetch from 'node-fetch'
