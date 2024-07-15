@@ -12,6 +12,6 @@ export const finalResults = () => {
         round16Rankings: ['de', 'es', 'pt', 'fr', 'nl', 'tr', 'gb-eng', 'ch'],
         quarterFinalsRankings: ['es', 'fr', 'nl', 'gb-eng'],
         semiFinalsRankings: ['es', 'gb-eng'],
-        finalsRankings: [],
+        finalsRankings: ['es'],
     }
 }
